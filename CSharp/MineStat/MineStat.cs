@@ -216,7 +216,6 @@ namespace MineStatLib
         return;
 
       ConnectionStatus = RequestWithUt3Gs4QueryProtocol();
-      //if (ConnectionStatus == ConnStatus.Connfail) return;
 
       ConnectionStatus = RequestWrapper(RequestWithLegacyProtocol);
       ConnStatus result;
@@ -855,6 +854,10 @@ namespace MineStatLib
       {
         return ConnStatus.Unknown;
       }
+      finally
+      {
+        sock.Close();
+      }
 
       return ParseUt3Gs4Protocol(statResponse);
     }
@@ -864,7 +867,7 @@ namespace MineStatLib
     /// </summary>
     /// <param name="rawPayload">The raw payload, without packet length and -id</param>
     /// <returns>ConnStatus - See <see cref="ConnStatus"/> for possible values</returns>
-    private ConnStatus ParseUt3Gs4Protocol(byte[] rawPayload)
+    private ConnStatus ParseUT3GS4Protocol(byte[] rawPayload)
     {
       try
       {
