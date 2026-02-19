@@ -837,7 +837,7 @@ namespace MineStatLib
         byte[] statRequest = new byte[11];
         statRequest[0] = 0xFE; statRequest[1] = 0xFD; statRequest[2] = 0x00;
 
-        // Token jako Big-Endian
+        // Token Big-Endian
         tokenBytes = BitConverter.GetBytes(token);
         if (BitConverter.IsLittleEndian)
             Array.Reverse(tokenBytes);
@@ -845,10 +845,10 @@ namespace MineStatLib
 
         sock.Send(statRequest, statRequest.Length);
 
-        // --- 3. ODBIERZ STAT RESPONSE ---
+        // --- 3. RECEIVE STAT RESPONSE ---
         statResponse = sock.Receive(ref remoteEP);
       }      
-      catch
+      catch (Exception)
       {
         return ConnStatus.Unknown;
       }
