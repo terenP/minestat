@@ -815,7 +815,6 @@ namespace MineStatLib
       stopWatch.Stop();
       Latency = stopWatch.ElapsedMilliseconds;
 
-
       byte[] statResponse;
       try
       {
@@ -848,7 +847,6 @@ namespace MineStatLib
 
         // --- 3. ODBIERZ STAT RESPONSE ---
         statResponse = sock.Receive(ref remoteEP);
-
       }      
       catch
       {
@@ -859,7 +857,7 @@ namespace MineStatLib
         sock.Close();
       }
 
-      return ParseUt3Gs4Protocol(statResponse);
+      return ParseUT3GS4Protocol(statResponse);
     }
 
     /// <summary>
@@ -907,7 +905,6 @@ namespace MineStatLib
         {
           return ConnStatus.Unknown;
         }
-
 
         // MOTD
         if (data.TryGetValue("hostname", out var hostname))
@@ -960,8 +957,6 @@ namespace MineStatLib
       {
         return ConnStatus.Unknown;
       }
-
-    
     }
 
     /// <summary>
